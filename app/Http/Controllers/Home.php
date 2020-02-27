@@ -12,6 +12,10 @@ class Home extends Controller
     		['id' => 2, 'nama' => 'Bulpoin', 'qty'> '5' ]
     	];
 
-    	return $data;
+    	return view('produk');
+    }
+
+    public function keranjang(){
+    	return view('keranjang');
     }
 }
