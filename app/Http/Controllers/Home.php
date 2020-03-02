@@ -23,9 +23,11 @@ class Home extends Controller
 
         if($tcart > 0){
             Cart::where('id_produk', $produk->id)->increment('qty', 1);
+            Produk::where('id', $produk->id)->decrement('qty', 1);
         }
         else{
             Cart::create(['id_produk' => $produk->id, 'qty' => 1]);
+            Produk::where('id', $produk->id)->decrement('qty', 1);
         }
 
         return redirect('/keranjang');
@@ -38,5 +40,12 @@ class Home extends Controller
         $data['cart'] = $cart;
 
         return view('keranjang', $data);
+    }
+
+    public function delcart(Cart $cart){
+        Produk::where('id', $cart->id_produk)->increment('qty', $cart->qty);
+        Cart::destroy('id', $cart->id);
+
+        return redirect('/keranjang');
     }
 }

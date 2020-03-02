@@ -19,7 +19,7 @@
 				<td>{{$data->produk->nama_produk}}</td>
 				<td>{{$data->qty}}</td>
 				<td>
-					<a href="#"><button class="btn btn-danger">Hapus</button></a>
+					<a href="{{url('/delcart/'.$data->id)}}"><button class="btn btn-danger">Hapus</button></a>
 				</td>
 			</tr>
 			@endforeach
