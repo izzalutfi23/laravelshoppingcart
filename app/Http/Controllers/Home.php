@@ -2,24 +2,41 @@
 
 namespace App\Http\Controllers;
 
+use App\Produk;
+use App\Cart;
 use Illuminate\Http\Request;
 
 class Home extends Controller
 {
     public function index(){
-    	$data = [
-    		['id' => 1, 'nama' => 'Buku', 'qty'> '10' ],
-    		['id' => 2, 'nama' => 'Bulpoin', 'qty'> '5' ]
-    	];
+    	$produk = Produk::all();
+        $data = array(
+            'produk' => $produk
+        );
 
-    	return view('produk');
+    	return view('produk', $data);
+    }
+
+    public function addcart(Produk $produk){
+        $cart = Cart::where('id_produk', $produk->id)->get();
+        $tcart = $cart->count();
+
+        if($tcart > 0){
+            Cart::where('id_produk', $produk->id)->increment('qty', 1);
+        }
+        else{
+            Cart::create(['id_produk' => $produk->id, 'qty' => 1]);
+        }
+
+        return redirect('/keranjang');
+        
     }
 
     public function keranjang(){
-    	return view('keranjang');
-    }
+        $cart = Cart::all();
 
-    public function pembelian(){
-        return view('pembelian');
+        $data['cart'] = $cart;
+
+        return view('keranjang', $data);
     }
 }

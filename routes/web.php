@@ -14,3 +14,6 @@
 Route::get('/', 'Home@index');
 Route::get('/keranjang', 'Home@keranjang');
 Route::get('/pembelian', 'Home@pembelian');
+
+// Add to Cart
+Route::get('/addcart/{produk}', 'Home@addcart');

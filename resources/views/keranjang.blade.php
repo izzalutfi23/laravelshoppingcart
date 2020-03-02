@@ -6,31 +6,23 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<th scope="col">#</th>
-				<th scope="col">First</th>
-				<th scope="col">Last</th>
-				<th scope="col">Handle</th>
+				<th scope="col">No</th>
+				<th scope="col">Nama Produk</th>
+				<th scope="col">Jumlah</th>
+				<th scope="col">Aksi</th>
 			</tr>
 		</thead>
 		<tbody>
+			@foreach($cart as $data)
 			<tr>
-				<th scope="row">1</th>
-				<td>Mark</td>
-				<td>Otto</td>
-				<td>@mdo</td>
+				<th scope="row">{{$loop->iteration}}</th>
+				<td>{{$data->produk->nama_produk}}</td>
+				<td>{{$data->qty}}</td>
+				<td>
+					<a href="#"><button class="btn btn-danger">Hapus</button></a>
+				</td>
 			</tr>
-			<tr>
-				<th scope="row">2</th>
-				<td>Jacob</td>
-				<td>Thornton</td>
-				<td>@fat</td>
-			</tr>
-			<tr>
-				<th scope="row">3</th>
-				<td>Larry</td>
-				<td>the Bird</td>
-				<td>@twitter</td>
-			</tr>
+			@endforeach
 		</tbody>
 	</table>
 </div>
