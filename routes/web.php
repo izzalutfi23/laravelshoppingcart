@@ -13,3 +13,4 @@
 
 Route::get('/', 'Home@index');
 Route::get('/keranjang', 'Home@keranjang');
+Route::get('/pembelian', 'Home@pembelian');

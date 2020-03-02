@@ -18,4 +18,8 @@ class Home extends Controller
     public function keranjang(){
     	return view('keranjang');
     }
+
+    public function pembelian(){
+        return view('pembelian');
+    }
 }

@@ -21,6 +21,9 @@
 				<li class="nav-item">
 					<a class="nav-link" href="{{url('/keranjang')}}">Keranjang</a>
 				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{{url('/pembelian')}}">Pembelian</a>
+				</li>
 			</ul>
 		</div>
 	</nav>
