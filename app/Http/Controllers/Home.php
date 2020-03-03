@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Produk;
 use App\Cart;
+use App\DetailBeli;
 use Illuminate\Http\Request;
 
 class Home extends Controller
@@ -47,5 +48,22 @@ class Home extends Controller
         Cart::destroy('id', $cart->id);
 
         return redirect('/keranjang');
+    }
+
+    public function checkout(){
+        $cart = Cart::select('id_produk', 'qty')->get();
+
+        // Insert penjualan
+        $penjualan = new \App\Penjualan;
+
+        $penjualan->kasir = 'izza';
+        $penjualan->tgl_transaksi = date('Y-m-d');
+        $penjualan->save();
+
+        foreach ($cart as $key) {
+            DetailBeli::insert(['id_penjualan' => $penjualan->id, 'id_produk' => $key->id_produk, 'qty' => $key->qty]);
+        }
+
+        return $cart;
     }
 }

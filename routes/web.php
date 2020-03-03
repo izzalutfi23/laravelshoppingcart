@@ -19,3 +19,5 @@ Route::get('/pembelian', 'Home@pembelian');
 Route::get('/addcart/{produk}', 'Home@addcart');
 // Delete Cart
 Route::get('/delcart/{cart}', 'Home@delcart');
+// Checkout
+Route::get('/checkout', 'Home@checkout');

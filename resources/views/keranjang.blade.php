@@ -25,5 +25,6 @@
 			@endforeach
 		</tbody>
 	</table>
+	<a href="{{url('/checkout')}}"><button class="btn btn-success float-right mt-5">Checkout >></button></a>
 </div>
 @endsection()
