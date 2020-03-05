@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Produk;
 use App\Cart;
 use App\DetailBeli;
+use App\Penjualan;
 use Illuminate\Http\Request;
 
 class Home extends Controller
@@ -61,9 +62,18 @@ class Home extends Controller
         $penjualan->save();
 
         foreach ($cart as $key) {
-            DetailBeli::insert(['id_penjualan' => $penjualan->id, 'id_produk' => $key->id_produk, 'qty' => $key->qty]);
+            DetailBeli::create(['id_penjualan' => $penjualan->id, 'id_produk' => $key->id_produk, 'qty' => $key->qty]);
         }
 
+        Cart::truncate();
+
         return $cart;
+    }
+
+    public function pembelian(){
+        $penjualan = Penjualan::all();
+        $data['penjualan'] = $penjualan;
+
+        return view('pembelian', $data);
     }
 }
