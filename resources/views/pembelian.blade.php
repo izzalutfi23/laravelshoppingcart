@@ -23,39 +23,53 @@
 				</td>
 			</tr>
 
-			<!-- Detail Beli -->
-			<div class="modal fade" id="detail{{$data->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							<div class="table-responsive">
-							<table class="table table-condensed">
-								<thead>
-									<tr>
-										<th><input type="checkbox" id="toggleChkSelFabricante" name="toggleChkSelFabricante"></th>
-										<th>Fabricante</th>
-									</tr>
-								</thead>
-								<tbody id="selFabricanteBody"><tr data-idproductosolicitud="1" data-id="1"><td><div class="checkbox"><label><input type="checkbox" name="fabLinkChoice[]" value="1"></label></div></td><td>Dist1</td><td>DR</td><td class="has_pais fabTd-1"><span id="14">México</span>, <span id="15">Nicaragua</span>, <span id="16">Panamá</span></td><td>1212212</td></tr><tr data-idproductosolicitud="1" data-id="1"><td><div class="checkbox"><label><input type="checkbox" name="fabLinkChoice[]" value="1"></label></div></td><td>Dist1</td><td>DR</td><td class="has_pais fabTd-1"><span id="14">México</span>, <span id="15">Nicaragua</span>, <span id="16">Panamá</span></td><td>1212212</td></tr></tbody>
-							</table>
-						</div>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary">Save changes</button>
-						</div>
-					</div>
-				</div>
-			</div>
-
 			@endforeach
 		</tbody>
 	</table>
 </div>
+
+@foreach($penjualan as $key)
+<!-- Detail Beli -->
+<div class="modal fade" id="detail{{$key->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Modal title {{$key->id}}</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>No</th>
+							<th>Nama Produk</th>
+							<th>Jumlah</th>
+						</tr>
+					</thead>
+					<tbody>
+						@php
+							$djual = \App\DetailBeli::where('id_penjualan', $key->id)->get();
+						@endphp
+						@foreach($djual as $detail)
+						<tr>
+							<th scope="row">{{$loop->iteration}}</th>
+							<td>{{$detail->produk->nama_produk}}</td>
+							<td>{{$detail->qty}}</td>
+						</tr>
+						@endforeach
+					</tbody>
+				</table>				
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End Detail Produk -->
+@endforeach
+
 @endsection()
